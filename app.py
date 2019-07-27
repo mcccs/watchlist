@@ -39,3 +39,5 @@ def test_url_for():
     return 'Test page'
 
 
+if __name__ == '__main__':
+    app.run(host='192.168.179.131', port=5000)
