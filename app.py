@@ -75,11 +75,24 @@ def forge():
 
 @app.route('/')
 def index():
-    user = User.query.first()
     movies = Movie.query.all()
-    return render_template('index.html', user=user, movies=movies)
+    return render_template('index.html', movies=movies)
 
 
+# 上下文处理 变量在所有模板中可见
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user=user)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    user = User.query.first()
+    return render_template('404.html'), 404  # 返回模板和状态码
+
+
+"""URL 解析"""
 @app.route('/user/<name>')
 def user_page(name):
     return 'User: %s' % name
