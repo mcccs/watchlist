@@ -103,7 +103,7 @@ def login():
         # 验证
         if username == user.username and user.validate_password(password):
             login_user(user)
-            flash('login success.')
+            flash('Login success.')
             return redirect(url_for('index'))
 
         flash('Invalid username or password.')
